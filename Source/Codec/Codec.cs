@@ -40,7 +40,8 @@ namespace Aperture {
     /// <summary>
     ///   Feeds a frame to the encoder
     /// </summary>
-    public abstract void Feed();
+    /// <param name="frame">Video frame to be encoded</param>
+    public abstract void Feed(VideoFrame frame);
 
     /// <inheritdoc />
     /// <summary>

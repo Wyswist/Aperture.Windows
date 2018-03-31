@@ -13,6 +13,11 @@ namespace Aperture {
     public Guid PixelFormat { get; }
 
     /// <summary>
+    ///   WIC bitmap object
+    /// </summary>
+    public BitmapSource Bitmap { get; }
+
+    /// <summary>
     ///   WIC bitmap lock object
     /// </summary>
     public BitmapLock BitmapLock { get; }
@@ -29,6 +34,7 @@ namespace Aperture {
       Height = bitmap.Size.Height;
 
       PixelFormat = bitmap.PixelFormat;
+      Bitmap = bitmap;
       BitmapLock = bitmapLock;
 
       PresentTime = presentTime;

@@ -14,6 +14,7 @@ namespace Aperture {
   /// <summary>
   ///   Provides DXGI Desktop Duplication support for capturing the screen
   /// </summary>
+  [DisplayName("Desktop Duplication")]
   internal sealed class DxgiVideoCaptureDevice : VideoCaptureDevice {
     /// <summary>
     ///   Timeout, in milliseconds, to consider a desktop duplication frame lost

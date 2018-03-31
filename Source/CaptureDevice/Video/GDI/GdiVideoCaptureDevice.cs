@@ -3,6 +3,11 @@ using System.Drawing;
 using System.Drawing.Imaging;
 
 namespace Aperture {
+  /// <inheritdoc />
+  /// <summary>
+  ///   Implements video capture device that uses native GDI calls in order to capture screen bitmaps
+  /// </summary>
+  [DisplayName("GDI")]
   public sealed class GdiVideoCaptureDevice : VideoCaptureDevice {
     /// <summary>
     ///   Attached window handle
