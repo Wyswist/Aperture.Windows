@@ -156,7 +156,10 @@ namespace Aperture {
     /// <summary>
     ///   Creates a single bitmap from the captured frames and returns an object with its information
     /// </summary>
-    /// <returns>A <see cref="T:Captain.Common.FrameData" /> instance</returns>
+    /// <returns>
+    ///   A <see cref="VideoFrame" /> instance that can be either a <see cref="D3D11VideoFrame"/> or
+    ///   a <see cref="BitmapVideoFrame" />
+    /// </returns>
     public override VideoFrame LockFrame() {
       long presentTimeTicks = (long) (this.lastPresentTime * 10e6 / this.perfFreq);
 
