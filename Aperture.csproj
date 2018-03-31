@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <Description>Windows screen capturing and recording library </Description>
+    <Company>sanlyx</Company>
+    <Product>Captain</Product>
+    <Copyright>Copyright © 2018, sanlyx</Copyright>
+    <AssemblyVersion>0.1.0.0</AssemblyVersion>
+
+    <TargetFramework>net45</TargetFramework>
+
+    <Platforms>x86;x64</Platforms>
+    <OutputPath>$(SolutionDir)\Out\$(Configuration)\$(Platform)</OutputPath>
+
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <DefineConstants>TRACE;DEBUG;WIN64</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <DefineConstants>TRACE;WIN64</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
+    <DefineConstants>TRACE;DEBUG;WIN32</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
+    <DefineConstants>TRACE;WIN32</DefineConstants>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.ValueTuple" Version="4.4.0" />
+  </ItemGroup>
+</Project>
