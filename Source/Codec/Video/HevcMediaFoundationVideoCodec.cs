@@ -1,5 +1,4 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using SharpDX.MediaFoundation;
 using SharpDX.Multimedia;
 
@@ -8,6 +7,8 @@ namespace Aperture {
   /// <summary>
   ///   Defines a Media Foundation-based HEVC video codec
   /// </summary>
+  [DisplayName("MP4 (HEVC)")]
+  [MediaType("video/mp4", "mp4")]
   public sealed class HevcMediaFoundationVideoCodec : MediaFoundationVideoCodec {
     /// <inheritdoc />
     /// <summary>

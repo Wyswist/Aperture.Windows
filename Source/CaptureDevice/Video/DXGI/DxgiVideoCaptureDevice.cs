@@ -15,7 +15,7 @@ namespace Aperture {
   ///   Provides DXGI Desktop Duplication support for capturing the screen
   /// </summary>
   [DisplayName("Desktop Duplication")]
-  internal sealed class DxgiVideoCaptureDevice : VideoCaptureDevice {
+  public sealed class DxgiVideoCaptureDevice : VideoCaptureDevice {
     /// <summary>
     ///   Timeout, in milliseconds, to consider a desktop duplication frame lost
     /// </summary>
@@ -44,6 +44,11 @@ namespace Aperture {
     ///   primary monitor.
     /// </remarks>
     private Rectangle virtualRect;
+
+    /// <summary>
+    ///   Enumerates the devices being used by the current capture sources
+    /// </summary>
+    public IEnumerable<SharpDX.DXGI.Device> Devices => this.sources.Select(s => s.DxgiDevice);
 
     /// <inheritdoc />
     /// <summary>
@@ -224,10 +229,6 @@ namespace Aperture {
       switch (frame) {
         case BitmapVideoFrame bitmapFrame:
           bitmapFrame.BitmapLock.Dispose();
-          break;
-
-        case D3D11VideoFrame texturedFrame:
-          texturedFrame.Texture.Dispose();
           break;
       }
     }

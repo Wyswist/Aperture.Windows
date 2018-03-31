@@ -9,17 +9,23 @@ using SharpDX.Multimedia;
 using SharpDX.WIC;
 using Device = SharpDX.DXGI.Device;
 
+// ReSharper disable InconsistentNaming
+
 namespace Aperture {
   /// <inheritdoc cref="VideoCodec" />
   /// <summary>
   ///   Implements common logic for Media Foundation video codecs
   /// </summary>
   public abstract class MediaFoundationVideoCodec : VideoCodec, IDxgiEnabledVideoCodec {
-    // ReSharper disable once InconsistentNaming
     /// <summary>
     ///   Do not initialize the sockets library
     /// </summary>
     private const int MFSTARTUP_NOSOCKET = 1;
+
+    /// <summary>
+    ///   No samples were processed by the sink writer
+    /// </summary>
+    private const int MF_E_SINK_NO_SAMPLES_PROCESSED = unchecked((int) 0xC00D4A44);
 
     /// <summary>
     ///   Byte stream for writing video encoder output
@@ -42,9 +48,9 @@ namespace Aperture {
     private int streamIdx;
 
     /// <summary>
-    ///   Whether this is the first frame or not
+    ///   Timestamp of the present time for the first frame
     /// </summary>
-    private bool isFirstFrame = true;
+    private long firstFramePresentTime;
 
     /// <summary>
     ///   Last present time
@@ -90,6 +96,11 @@ namespace Aperture {
       this.bitRate = bitRate;
     }
 
+    /// <inheritdoc />
+    /// <summary>
+    ///   Binds a DXGI device to the video codec
+    /// </summary>
+    /// <param name="device">DXGI device object</param>
     public void BindDevice(Device device) {
       this.dxgiManager = new DXGIDeviceManager();
       this.dxgiManager.ResetDevice(device);
@@ -115,7 +126,6 @@ namespace Aperture {
         // create byte stream and sink writer
         this.byteStream = new ByteStream(DestinationStream);
         this.sinkWriter = MediaFactory.CreateSinkWriterFromURL(null, this.byteStream.NativePointer, attrs);
-
 
         // create output media type
         using (var outMediaType = new SharpDX.MediaFoundation.MediaType()) {
@@ -215,14 +225,15 @@ namespace Aperture {
       sample.AddBuffer(buffer);
 
       // set up sample timing
-      sample.SampleTime = frame.PresentTime;
-
-      if (!this.isFirstFrame) {
+      if (this.lastFrameTime != 0) {
         sample.SampleDuration = frame.PresentTime - this.lastFrameTime;
       } else {
-        this.isFirstFrame = false;
+        // set first frame present time so that we can set the timestamp of subsequent frames relative to the
+        // beggining of the video
+        this.firstFramePresentTime = frame.PresentTime;
       }
 
+      sample.SampleTime = frame.PresentTime - this.firstFramePresentTime;
       this.lastFrameTime = frame.PresentTime;
 
       try {
@@ -238,7 +249,11 @@ namespace Aperture {
     ///   Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources
     /// </summary>
     public override void Dispose() {
-      this.sinkWriter.Finalize();
+      try {
+        this.sinkWriter.Finalize();
+      } catch (SharpDXException exception) when (exception.ResultCode.Code == MF_E_SINK_NO_SAMPLES_PROCESSED) {
+        this.byteStream.Length = 0;
+      }
 
       this.byteStream?.Dispose();
       this.sinkWriter?.Dispose();

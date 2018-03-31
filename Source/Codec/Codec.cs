@@ -14,12 +14,12 @@ namespace Aperture {
     /// <summary>
     ///   Size, in pixels, of the frames to be fed to this encoder
     /// </summary>
-    protected (int Width, int Height) FrameSize { get; }
+    public (int Width, int Height) FrameSize { get; }
 
     /// <summary>
     ///   Stream where the encoder output is to be received
     /// </summary>
-    protected Stream DestinationStream { get; }
+    public Stream DestinationStream { get; }
 
     /// <summary>
     ///   Class constructor

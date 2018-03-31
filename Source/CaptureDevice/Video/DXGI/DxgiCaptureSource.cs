@@ -20,6 +20,11 @@ namespace Aperture {
     internal Device Device { get; }
 
     /// <summary>
+    ///   DXGI device instance
+    /// </summary>
+    internal SharpDX.DXGI.Device DxgiDevice { get; }
+
+    /// <summary>
     ///   DXGI adapter instance
     /// </summary>
     private Adapter1 Adapter1 { get; }
@@ -101,6 +106,7 @@ namespace Aperture {
 #endif
         };
 
+        DxgiDevice = Device.QueryInterface<SharpDX.DXGI.Device>();
         Context = Device.ImmediateContext;
 
         // create texture
@@ -187,6 +193,7 @@ namespace Aperture {
       Output1?.Dispose();
       Output6?.Dispose();
       Context.Dispose();
+      DxgiDevice.Dispose();
       Device.Dispose();
       Texture.Dispose();
       Adapter1.Dispose();

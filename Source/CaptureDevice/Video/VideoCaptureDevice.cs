@@ -11,12 +11,12 @@ namespace Aperture {
     ///   The capture device is responsible for handling monitor information and resolvin the actual location on the
     ///   selected device.
     /// </summary>
-    protected (int X, int Y) VirtualLocation { get; }
+    public (int X, int Y) VirtualLocation { get; }
 
     /// <summary>
     ///   The size of the region to be captured.
     /// </summary>
-    protected (int Width, int Height) Size { get; }
+    public (int Width, int Height) Size { get; }
 
     /// <inheritdoc />
     /// <summary>

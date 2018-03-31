@@ -58,7 +58,7 @@ namespace Aperture {
             using (var bmp = new Bitmap(this.factory,
                                         frame.Width,
                                         frame.Height,
-                                        PixelFormat.Format32bppRGBA,
+                                        PixelFormat.Format32bppBGRA,
                                         new DataRectangle(gdiVideoFrame.BitmapData.Scan0,
                                                           gdiVideoFrame.BitmapData.Stride))) {
               frameEncode.WriteSource(bmp);
@@ -77,7 +77,7 @@ namespace Aperture {
               using (var bmp = new Bitmap(this.factory,
                                           frame.Width,
                                           frame.Height,
-                                          PixelFormat.Format32bppRGBA,
+                                          PixelFormat.Format32bppBGRA,
                                           new DataRectangle(box.DataPointer, box.RowPitch))) {
                 frameEncode.WriteSource(bmp);
               }
