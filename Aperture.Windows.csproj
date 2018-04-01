@@ -39,10 +39,4 @@
     <PackageReference Include="SharpDX.MediaFoundation" Version="4.0.1" />
     <PackageReference Include="System.ValueTuple" Version="4.4.0" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="SharpDX.Direct2D1">
-      <HintPath>..\packages\SharpDX.Direct2D1.4.0.1\lib\net45\SharpDX.Direct2D1.dll</HintPath>
-    </Reference>
-  </ItemGroup>
 </Project>

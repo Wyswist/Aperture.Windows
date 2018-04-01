@@ -117,7 +117,7 @@ namespace Aperture {
               desktopResource.Dispose();
               source.Duplication.ReleaseFrame();
             }
-
+            
             // try to capture a frame
             source.Duplication.AcquireNextFrame(DuplicationFrameTimeout,
                                                 out info,

@@ -7,9 +7,9 @@ namespace Aperture {
   /// <summary>
   ///   Defines a Media Foundation-based HEVC video codec
   /// </summary>
-  [DisplayName("MP4 (HEVC)")]
+  [DisplayName("MP4 (H.264)")]
   [MediaType("video/mp4", "mp4")]
-  public sealed class HevcMediaFoundationVideoCodec : MediaFoundationVideoCodec {
+  public sealed class H264MediaFoundationVideoCodec : MediaFoundationVideoCodec {
     /// <inheritdoc />
     /// <summary>
     ///   Class constructor
@@ -17,13 +17,13 @@ namespace Aperture {
     /// <param name="width">Width, in pixels, of the frames to be fed to this encoder</param>
     /// <param name="height">Height, in pixels, of the frames to be fed to this encoder</param>
     /// <param name="destStream">Destination stream</param>
-    public HevcMediaFoundationVideoCodec(int width, int height, Stream destStream)
+    public H264MediaFoundationVideoCodec(int width, int height, Stream destStream)
       : base(
         width,
         height,
         destStream,
         TranscodeContainerTypeGuids.Mpeg4,
-        VideoFormatGuids.FromFourCC(new FourCC("HEVC")),
+        VideoFormatGuids.FromFourCC(new FourCC("H264")),
         30,
         2_500_000) { }
 
@@ -36,13 +36,13 @@ namespace Aperture {
     /// <param name="destStream">Destination stream</param>
     /// <param name="fps">Frame rate in frames per second</param>
     /// <param name="bitrate">Bitrate</param>
-    public HevcMediaFoundationVideoCodec(int width, int height, Stream destStream, int fps, int bitrate)
+    public H264MediaFoundationVideoCodec(int width, int height, Stream destStream, int fps, int bitrate)
       : base(
         width,
         height,
         destStream,
         TranscodeContainerTypeGuids.Mpeg4,
-        VideoFormatGuids.FromFourCC(new FourCC("HEVC")),
+        VideoFormatGuids.FromFourCC(new FourCC("H264")),
         fps,
         bitrate) { }
   }
