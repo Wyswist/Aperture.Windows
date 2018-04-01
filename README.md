@@ -1,4 +1,4 @@
-﻿# Aperture
+﻿# Aperture.Windows
 ![version: 0.1](https://img.shields.io/badge/version-0.1-blue.svg)
 ![license: BSD 2-Clause](https://img.shields.io/badge/license-BSD_2--Clause-brightgreen.svg)
 > Windows screen capturing and recording library
@@ -17,10 +17,10 @@ lack of [Desktop Duplication API](https://msdn.microsoft.com/en-us/library/windo
 
 ## Building
 ```
-$ git clone https://github.com/CaptainApp/Aperture
-$ cd Aperture
+$ git clone https://github.com/CaptainApp/Aperture.Windows
+$ cd Aperture.Windows
 $ nuget restore
-$ devenv Aperture.csproj /Build
+$ devenv Aperture.Windows.csproj /Build
 ```
 
 ## Open-source code
