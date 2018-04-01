@@ -9,7 +9,7 @@
     <TargetFramework>net45</TargetFramework>
 
     <Platforms>x86;x64</Platforms>
-    <OutputPath>$(SolutionDir)\Out\$(Configuration)\$(Platform)</OutputPath>
+    <OutputPath>$(MSBuildProjectDirectory)\Out\$(Configuration)\$(Platform)</OutputPath>
 
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
